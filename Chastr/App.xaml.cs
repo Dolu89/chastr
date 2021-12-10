@@ -1,8 +1,5 @@
 ﻿using Chastr.Services;
-using Chastr.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Chastr
 {
@@ -14,7 +11,7 @@ namespace Chastr
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            MainPage = new AppShell();            
         }
 
         protected override void OnStart()

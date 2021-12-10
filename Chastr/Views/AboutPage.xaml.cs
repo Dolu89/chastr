@@ -1,7 +1,7 @@
-﻿using System;
-using System.ComponentModel;
+﻿using Chastr.Utils;
+using System.Diagnostics;
+using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Chastr.Views
 {
@@ -10,6 +10,17 @@ namespace Chastr.Views
         public AboutPage()
         {
             InitializeComponent();
+            Setup();
         }
+
+        private async void Setup()
+        {
+            var privateKey = await SecureStorage.GetAsync(Constants.PRIVATE_KEY);
+            if (string.IsNullOrEmpty(privateKey))
+            {
+                await Navigation.PushModalAsync(new InitPage());
+            }
+        }
+
     }
 }

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Chastr.Models
 {
-    public class Contact
+    public class Contact : IItem
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        [PrimaryKey]
+        public string Id { get; set; }
         public string PubKey { get; set; }
     }
 }

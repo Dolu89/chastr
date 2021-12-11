@@ -12,6 +12,7 @@ namespace Chastr
             InitializeComponent();
 
             DependencyService.Register<DataStore<Item>>();
+            DependencyService.Register<DataStore<Contact>>();
             MainPage = new AppShell();
         }
 

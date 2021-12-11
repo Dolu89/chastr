@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Chastr.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ItemsViewModel : BaseViewModel<Item>
     {
         private Item _selectedItem;
 

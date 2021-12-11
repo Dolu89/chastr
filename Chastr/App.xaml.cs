@@ -1,5 +1,5 @@
-﻿using Chastr.Services;
-using Chastr.Websocket;
+﻿using Chastr.Models;
+using Chastr.Services;
 using Xamarin.Forms;
 
 namespace Chastr
@@ -11,13 +11,13 @@ namespace Chastr
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<DataStore<Item>>();
             MainPage = new AppShell();
         }
 
         protected override void OnStart()
         {
-            RelaysPool.Startup();
+            //RelaysPool.Startup();
         }
 
         protected override void OnSleep()

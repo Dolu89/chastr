@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace Chastr.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemDetailViewModel : BaseViewModel
+    public class ItemDetailViewModel : BaseViewModel<Item>
     {
         private string itemId;
         private string text;

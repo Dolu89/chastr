@@ -16,7 +16,7 @@ namespace Chastr.Websocket
         private static readonly List<string> _relays = new List<string>
         {
             "wss://freedom-relay.herokuapp.com/ws",
-            "wss://relayer.fiatjaf.com/"
+            //"wss://relayer.fiatjaf.com/"
         };
         private static readonly ManualResetEvent ExitEvent = new ManualResetEvent(false);
 

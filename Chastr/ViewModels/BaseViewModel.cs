@@ -8,10 +8,13 @@ using Xamarin.Forms;
 
 namespace Chastr.ViewModels
 {
+    public class BaseViewModel<T> : BaseViewModel
+    {
+        public IDataStore<T> DataStore => DependencyService.Get<IDataStore<T>>();
+    }
+
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-
         bool isBusy = false;
         public bool IsBusy
         {

@@ -1,5 +1,5 @@
 ﻿using Chastr.Models;
-using Chastr.Views;
+using Chastr.Views.Contacts;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;

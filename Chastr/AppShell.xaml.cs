@@ -1,12 +1,9 @@
-﻿using Chastr.ViewModels;
-using Chastr.Views;
-using System;
-using System.Collections.Generic;
+﻿using Chastr.Views.Contacts;
 using Xamarin.Forms;
 
 namespace Chastr
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public AppShell()
         {

@@ -3,7 +3,7 @@ using Chastr.ViewModels.Contacts;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Chastr.Views
+namespace Chastr.Views.Contacts
 {
     public partial class ContactsPage : ContentPage
     {

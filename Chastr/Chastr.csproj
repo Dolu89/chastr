@@ -16,16 +16,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ContactsPage.xaml.cs">
+    <Compile Update="Views\Contacts\ContactsPage.xaml.cs">
       <DependentUpon>ContactsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ContactsPage.xaml.cs">
+    <Compile Update="Views\Contacts\ContactsPage.xaml.cs">
       <DependentUpon>ContactsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ContactDetailPage.xaml.cs">
+    <Compile Update="Views\Contacts\ContactDetailPage.xaml.cs">
       <DependentUpon>ContactDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\NewContactPage.xaml.cs">
+    <Compile Update="Views\Contacts\NewContactPage.xaml.cs">
       <DependentUpon>NewContactPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>

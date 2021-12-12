@@ -1,13 +1,16 @@
 ﻿using Chastr.Models.Nostr;
+using Chastr.Services;
+using Chastr.Utils;
+using Chastr.Utils.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.WebSockets;
+using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Websocket.Client;
+using Xamarin.Essentials;
 
 namespace Chastr.Websocket
 {
@@ -20,16 +23,35 @@ namespace Chastr.Websocket
         };
         private static readonly ManualResetEvent ExitEvent = new ManualResetEvent(false);
 
-        public static void Startup()
+        public static async void Startup()
         {
+            var dataStore = new DataStore<Models.Contact>();
+            var contacts = await dataStore.GetItemsAsync(true);
+            var ownPubKey = (await SecureStorage.GetAsync(Constants.PUBLIC_KEY)).ToString().ToLower();
+            var filters = new List<NostrSubscriptionFilter>
+            {
+                new NostrSubscriptionFilter
+                {
+                    Authors = contacts.Select(c => c.PubKey).ToArray(),
+                    PublicKey = ownPubKey,
+                    Kind = 4
+                },
+                new NostrSubscriptionFilter
+                {
+                    Author = ownPubKey,
+                    Kind = 4
+                }
+            };
+            var request = new NostrRequest(filters);
+
             foreach (var relay in _relays)
             {
                 var url = new Uri(relay);
-                ConnectToRelay(url);
+                ConnectToRelay(url, request.ToRequestJson());
             }
         }
 
-        private static void ConnectToRelay(Uri url)
+        private static void ConnectToRelay(Uri url, string requestPubKeys)
         {
             Task.Run(() =>
             {
@@ -55,7 +77,7 @@ namespace Chastr.Websocket
 
                     client.Start();
 
-                    client.Send("[\"REQ\",\"3947502939534355\",{\"authors\":null},{\"author\":\"232f317db43d00bfbaf03f0246bfc8f980f85ae77af494727ec51136264606d5\"},{\"#p\":\"232f317db43d00bfbaf03f0246bfc8f980f85ae77af494727ec51136264606d5\"}]");
+                    client.Send(requestPubKeys);
 
                     ExitEvent.WaitOne();
                 }
@@ -65,8 +87,9 @@ namespace Chastr.Websocket
 
         public static void AddRelay(string url)
         {
+            // TODO
             _relays.Add(url);
-            ConnectToRelay(new Uri(url));
+            ConnectToRelay(new Uri(url), "");
         }
     }
 }

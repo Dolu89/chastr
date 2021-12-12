@@ -9,7 +9,7 @@ using Xamarin.Essentials;
 
 namespace Chastr.Services
 {
-    internal class DataStore<T> : IDataStore<T> where T : IItem, new()
+    public class DataStore<T> : IDataStore<T> where T : IItem, new()
     {
         private readonly string dbPath = Path.Combine(FileSystem.AppDataDirectory, "chastr.db3");
         private readonly SQLiteAsyncConnection db;

@@ -1,14 +1,7 @@
-﻿using Chastr.Models;
+﻿using Chastr.Utils;
 using Chastr.ViewModels;
-using Chastr.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Chastr.Views
 {
@@ -21,12 +14,22 @@ namespace Chastr.Views
             InitializeComponent();
 
             BindingContext = _viewModel = new ContactsViewModel();
+            Setup();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             _viewModel.OnAppearing();
+        }
+
+        private async void Setup()
+        {
+            var privateKey = await SecureStorage.GetAsync(Constants.PRIVATE_KEY);
+            if (string.IsNullOrEmpty(privateKey))
+            {
+                await Navigation.PushModalAsync(new InitPage());
+            }
         }
     }
 }

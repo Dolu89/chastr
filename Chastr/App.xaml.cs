@@ -1,6 +1,8 @@
 ﻿using Chastr.Models;
 using Chastr.Services;
+using Chastr.Utils;
 using Chastr.Websocket;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Chastr
@@ -13,14 +15,18 @@ namespace Chastr
             InitializeComponent();
 
             DependencyService.Register<DataStore<Item>>();
-            DependencyService.Register<DataStore<Contact>>();
+            DependencyService.Register<DataStore<Models.Contact>>();
 
             MainPage = new AppShell();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
-            RelaysPool.Startup();
+            var privateKey = await SecureStorage.GetAsync(Constants.PRIVATE_KEY);
+            if (!string.IsNullOrEmpty(privateKey))
+            {
+                RelaysPool.Startup();
+            }
         }
 
         protected override void OnSleep()

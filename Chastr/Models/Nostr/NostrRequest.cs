@@ -1,9 +1,7 @@
-﻿using Chastr.Models.Nostr;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Chastr.Utils
+namespace Chastr.Models.Nostr
 {
     public class NostrRequest
     {

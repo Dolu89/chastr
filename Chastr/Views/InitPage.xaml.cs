@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 using System.Diagnostics;
 using Chastr.Utils;
 using Xamarin.Essentials;
+using Chastr.Websocket;
 
 namespace Chastr.Views
 {
@@ -19,8 +20,6 @@ namespace Chastr.Views
     public partial class InitPage : ContentPage
     {
         private const int KEY_SIZE = 32;
-        public string privateKey { get; set; }
-        public string publicKey { get; set; }
 
         public InitPage()
         {
@@ -29,22 +28,30 @@ namespace Chastr.Views
 
         private async void btnGenPrivateKey_Clicked(object sender, EventArgs e)
         {
-            var eckey = Context.Instance.CreateECPrivKey(Generate256BitsOfRandomEntropy());
-            var ecpubkey = eckey.CreatePubKey();
-            await SecureStorage.SetAsync(Constants.PRIVATE_KEY, ByteArrayToString(eckey.sec.ToBytes()));
-            await SecureStorage.SetAsync(Constants.PUBLIC_KEY, ByteArrayToString(ecpubkey.ToBytes()));
+            var privKey = Context.Instance.CreateECPrivKey(GenerateRandomScalar());
+            var pubKey = privKey.CreatePubKey().ToXOnlyPubKey();
+            await SecureStorage.SetAsync(Constants.PRIVATE_KEY, ByteArrayToString(privKey.sec.ToBytes()));
+            await SecureStorage.SetAsync(Constants.PUBLIC_KEY, ByteArrayToString(pubKey.ToBytes()));
 
+            RelaysPool.Startup();
             await Navigation.PopModalAsync();
         }
 
-        public static byte[] Generate256BitsOfRandomEntropy()
+        public static Scalar GenerateRandomScalar()
         {
-            var randomBytes = new byte[KEY_SIZE];
-            using (var rng = new RNGCryptoServiceProvider())
+            Scalar scalar = Scalar.Zero;
+            Span<byte> output = stackalloc byte[KEY_SIZE];
+            do
             {
-                rng.GetBytes(randomBytes);
-            }
-            return randomBytes;
+                RandomUtils.GetBytes(output);
+                scalar = new Scalar(output, out int overflow);
+                if (overflow != 0 || scalar.IsZero)
+                {
+                    continue;
+                }
+                break;
+            } while (true);
+            return scalar;
         }
 
         public static string ByteArrayToString(byte[] ba)

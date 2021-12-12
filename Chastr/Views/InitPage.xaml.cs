@@ -1,15 +1,8 @@
 ﻿using NBitcoin;
-using NBitcoin.DataEncoders;
 using NBitcoin.Secp256k1;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Diagnostics;
 using Chastr.Utils;
 using Xamarin.Essentials;
 using Chastr.Websocket;

@@ -16,12 +16,19 @@ namespace Chastr
 
             DependencyService.Register<DataStore<Item>>();
             DependencyService.Register<DataStore<Models.Contact>>();
+            DependencyService.Register<DataStore<MessageTag>>();
+            DependencyService.Register<DataStore<Message>>();
 
             MainPage = new AppShell();
         }
 
         protected override async void OnStart()
         {
+            // Trigger CreateTable. Find a better solution
+            new DataStore<Models.Contact>();
+            new DataStore<MessageTag>();
+            new DataStore<Message>();
+
             var privateKey = await SecureStorage.GetAsync(Constants.PRIVATE_KEY);
             if (!string.IsNullOrEmpty(privateKey))
             {

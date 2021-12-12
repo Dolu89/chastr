@@ -70,9 +70,10 @@ namespace Chastr.Websocket
                         Debug.WriteLine(info);
                     });
 
-                    client.MessageReceived.Subscribe(msg =>
+                    client.MessageReceived.Subscribe(async msg =>
                     {
                         Debug.WriteLine(msg);
+                        await EventHandler.Handle(msg.Text);
                     });
 
                     client.Start();

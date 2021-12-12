@@ -31,6 +31,7 @@ namespace Chastr.Utils.JsonConverts
                     result.Data.Add(reader.GetString());
                 }
 
+                reader.Read();
                 i++;
             }
 

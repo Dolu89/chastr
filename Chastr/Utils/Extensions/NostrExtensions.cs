@@ -48,9 +48,17 @@ namespace Chastr.Utils.Extensions
 
         public static ECXOnlyPubKey GetPublicKey(this NostrEvent nostrEvent)
         {
-            // TODO
-            //return Context.Instance.CreateXOnlyPubKey(Convert.FromHexString(nostrEvent.PublicKey));
-            throw new NotImplementedException();
+            return Context.Instance.CreateXOnlyPubKey(StringToByteArray(nostrEvent.PublicKey));
+        }
+
+        // https://stackoverflow.com/a/311179
+        public static byte[] StringToByteArray(string hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
         }
 
         public static IQueryable<NostrEvent> Filter(this IQueryable<NostrEvent> events, params NostrSubscriptionFilter[] filters)
@@ -161,6 +169,20 @@ namespace Chastr.Utils.Extensions
             var reqJson = new List<object> { REQUEST, id };
             reqJson.AddRange(request.Filters);
             return JsonSerializer.Serialize(reqJson);
+        }
+
+        public static Models.Message ToMessage(this NostrEvent e)
+        {
+            return new Models.Message
+            {
+                Id = e.Id,
+                Content = e.Content,
+                CreatedAt = e.CreatedAt,
+                Kind = (NostrKind)e.Kind,
+                PublicKey = e.PublicKey,
+                Signature = e.Signature,
+                Tags = e.Tags.Select(t => new Models.MessageTag { Id = t.Id, TagIdentifier = t.TagIdentifier, Data = t.Data, }).ToList()
+            };
         }
     }
 }

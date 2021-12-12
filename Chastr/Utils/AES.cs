@@ -14,7 +14,7 @@ namespace Chastr.Utils
     {
         private static byte[] GetSharedPubKey(string privateKey, string publicKey)
         {
-            var pubKey = new PubKey(publicKey);
+            var pubKey = new PubKey("02" + publicKey);
             var key = new Key(Encoders.Hex.DecodeData(privateKey));
             return pubKey.GetSharedPubkey(key).ToBytes().Skip(1).ToArray();
         }

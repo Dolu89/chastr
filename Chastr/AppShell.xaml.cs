@@ -1,4 +1,5 @@
 ﻿using Chastr.Views.Contacts;
+using Chastr.Views.Messages;
 using Xamarin.Forms;
 
 namespace Chastr
@@ -11,6 +12,7 @@ namespace Chastr
 
             Routing.RegisterRoute(nameof(ContactDetailPage), typeof(ContactDetailPage));
             Routing.RegisterRoute(nameof(NewContactPage), typeof(NewContactPage));
+            Routing.RegisterRoute(nameof(MessagesPage), typeof(MessagesPage));
         }
 
     }

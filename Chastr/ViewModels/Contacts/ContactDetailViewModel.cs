@@ -35,9 +35,9 @@ namespace Chastr.ViewModels.Contacts
         {
             try
             {
-                var Contact = await DataStore.GetItemAsync(contactId);
-                Id = Contact.Id;
-                PubKey = Contact.PubKey;
+                var contact = await DataStore.GetItemAsync(contactId);
+                Id = contact.Id;
+                PubKey = contact.PubKey;
             }
             catch (Exception)
             {

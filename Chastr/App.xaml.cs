@@ -14,7 +14,6 @@ namespace Chastr
         {
             InitializeComponent();
 
-            DependencyService.Register<DataStore<Item>>();
             DependencyService.Register<DataStore<Models.Contact>>();
             DependencyService.Register<DataStore<MessageTag>>();
             DependencyService.Register<DataStore<Message>>();

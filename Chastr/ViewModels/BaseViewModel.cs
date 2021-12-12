@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Chastr.ViewModels
 {
-    public class BaseViewModel<T> : BaseViewModel
+    public class BaseViewModel<T> : BaseViewModel where T : IItem, new()
     {
         public IDataStore<T> DataStore => DependencyService.Get<IDataStore<T>>();
     }

@@ -46,6 +46,11 @@ namespace Chastr.Services
             return await db.Table<T>().ToListAsync();
         }
 
+        public AsyncTableQuery<T> GetQueryableItemsAsync()
+        {
+            return db.Table<T>();
+        }
+
         public async Task<bool> UpdateItemAsync(T item)
         {
             var rowsAdded = await db.UpdateAsync(item);

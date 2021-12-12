@@ -29,6 +29,9 @@
     <Compile Update="Views\Contacts\NewContactPage.xaml.cs">
       <DependentUpon>NewContactPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Messages\MessagesPage.xaml.cs">
+      <DependentUpon>MessagesPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

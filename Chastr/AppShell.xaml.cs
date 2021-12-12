@@ -11,8 +11,6 @@ namespace Chastr
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
 
             Routing.RegisterRoute(nameof(ContactDetailPage), typeof(ContactDetailPage));
             Routing.RegisterRoute(nameof(NewContactPage), typeof(NewContactPage));

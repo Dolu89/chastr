@@ -1,10 +1,6 @@
 ﻿using Chastr.Models;
-using Chastr.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using Chastr.ViewModels.Contacts;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Chastr.Views
 {

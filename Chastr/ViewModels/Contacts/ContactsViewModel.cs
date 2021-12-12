@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Chastr.ViewModels
+namespace Chastr.ViewModels.Contacts
 {
     public class ContactsViewModel : BaseViewModel<Contact>
     {

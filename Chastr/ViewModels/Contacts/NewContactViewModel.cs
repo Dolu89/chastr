@@ -1,41 +1,30 @@
 ﻿using Chastr.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Chastr.ViewModels
+namespace Chastr.ViewModels.Contacts
 {
-    public class NewItemViewModel : BaseViewModel<Item>
+    public class NewContactViewModel : BaseViewModel<Contact>
     {
-        private string text;
-        private string description;
+        private string pubKey;
 
-        public NewItemViewModel()
+        public NewContactViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
-            this.PropertyChanged +=
+            PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+            return !string.IsNullOrWhiteSpace(pubKey);
         }
 
-        public string Text
+        public string PubKey
         {
-            get => text;
-            set => SetProperty(ref text, value);
-        }
-
-        public string Description
-        {
-            get => description;
-            set => SetProperty(ref description, value);
+            get => pubKey;
+            set => SetProperty(ref pubKey, value);
         }
 
         public Command SaveCommand { get; }
@@ -49,14 +38,13 @@ namespace Chastr.ViewModels
 
         private async void OnSave()
         {
-            Item newItem = new Item()
+            Contact newContact = new Contact()
             {
                 Id = Guid.NewGuid().ToString(),
-                Text = Text,
-                Description = Description
+                PubKey = PubKey
             };
 
-            await DataStore.AddItemAsync(newItem);
+            await DataStore.AddItemAsync(newContact);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

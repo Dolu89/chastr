@@ -1,5 +1,5 @@
 ﻿using Chastr.Utils;
-using Chastr.ViewModels;
+using Chastr.ViewModels.Contacts;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 

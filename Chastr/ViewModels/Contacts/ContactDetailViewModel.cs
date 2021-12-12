@@ -1,10 +1,9 @@
 ﻿using Chastr.Models;
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Chastr.ViewModels
+namespace Chastr.ViewModels.Contacts
 {
     [QueryProperty(nameof(ContactId), nameof(ContactId))]
     public class ContactDetailViewModel : BaseViewModel<Contact>

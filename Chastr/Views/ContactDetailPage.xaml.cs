@@ -1,5 +1,4 @@
-﻿using Chastr.ViewModels;
-using System.ComponentModel;
+﻿using Chastr.ViewModels.Contacts;
 using Xamarin.Forms;
 
 namespace Chastr.Views
